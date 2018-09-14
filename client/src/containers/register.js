@@ -3,7 +3,7 @@ import { Link, withRouter, Redirect } from "react-router-dom";
 import Form from "../components/form";
 import axios from "axios";
 
-const API = "localhost:3300/api/register";
+const API = "http://localhost:3300/api/register";
 
 class Register extends Component {
 	state = {
@@ -16,6 +16,18 @@ class Register extends Component {
 
 	handleChange = event => {
 		this.setState({ [event.target.name]: event.target.value });
+	};
+
+	onSubmit = event => {
+		event.preventDefault();
+		this.handleRegister({
+			username: this.state.username,
+			password: this.state.password,
+		});
+		this.setState({
+			username: "",
+			password: "",
+		});
 	};
 
 	handleRegister = user => {
@@ -35,7 +47,7 @@ class Register extends Component {
 				<Form
 					name={"Register"}
 					handleChange={this.handleChange}
-					handleSubmit={this.handleRegister}
+					handleSubmit={this.onSubmit}
 					username={this.state.username}
 					password={this.state.password}
 				/>
