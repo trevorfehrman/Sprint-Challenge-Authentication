@@ -15,6 +15,14 @@ class Login extends Component {
 		this.setState({ [event.target.name]: event.target.value });
 	};
 
+	onSubmit = event => {
+		event.preventDefault();
+		this.handleLogin({
+			username: this.state.username,
+			password: this.state.password,
+		});
+	};
+
 	handleLogin = user => {
 		this.setState({ loading: true });
 		axios.post(API, user).then(response => {
@@ -32,6 +40,7 @@ class Login extends Component {
 				<Form
 					name={"Login"}
 					handleChange={this.handleChange}
+					handleSubmit={this.onSubmit}
 					username={this.username}
 					password={this.password}
 				/>
