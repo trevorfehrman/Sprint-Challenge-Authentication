@@ -2,8 +2,8 @@
 
 1. What is the purpose of using _sessions_?
 
-I RESTful APIs are stateless; their end points are like pure functions. Plainly, an endpoint built in this paradigm has no way of knowing whether two separate requests are
-from two different users, or two repeated requests from one users. By instantiating a session we can keep track of a user's identity and thus provide them with
+RESTful APIs are stateless; their end points are like pure functions. Plainly, an endpoint built in this paradigm has no way of knowing whether two separate requests are
+from two different users, or two repeated requests from one user. By instantiating a session we can keep track of a user's identity and thus provide them with
 customized content.
 
 2. What does bcrypt do to help us store passwords in a secure manner.
