@@ -46,6 +46,34 @@ function register(req, res) {
 
 function login(req, res) {
 	// implement user login
+	let { username, password } = req.body;
+
+	if (!username || !password)
+		return res.json({
+			error: true,
+			message: "Please provide username and/or password",
+		});
+
+	db("users")
+		.where({ username: username })
+		.first()
+		.then(user => {
+			if (user && bcrypt.compareSync(password, user.password)) {
+				let token = generateToken(user);
+
+				res.json({
+					error: false,
+					message: `Welcome ${username}`,
+					token,
+				});
+			} else {
+				return register.json({
+					error: true,
+					message: "Incalid Login Info",
+				});
+			}
+		})
+		.catch(err => res.json(err));
 }
 
 function getJokes(req, res) {
