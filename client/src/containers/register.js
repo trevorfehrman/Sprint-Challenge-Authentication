@@ -11,7 +11,6 @@ class Register extends Component {
 		password: "",
 		loading: false,
 		message: "",
-		response: "",
 	};
 
 	handleChange = event => {
@@ -33,10 +32,10 @@ class Register extends Component {
 	handleRegister = user => {
 		this.setState({ loading: true });
 		axios.post(API, user).then(response => {
+			localStorage.setItem("token", response.data.token);
 			this.setState({
 				loading: false,
 				message: "Succesfully registered",
-				response: response,
 			});
 		});
 	};
